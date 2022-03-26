@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 
 const Dashboard = () => {
   const [name, setName] = useState("");
@@ -57,14 +59,12 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      <h1 className=" mt-5 font-bold text-2xl">Welcome Back {name}</h1>
-      <button
-        onClick={getUsers}
-        className="px-8 py-3 rounded-lg font-semibold tracking-wider text-white bg-blue-500 hover:bg-blue-600 mt-5"
-      >
-        get Users
-      </button>
+    <div className="flex bg-slate-200">
+      <Sidebar />
+      <div className="w-full flex flex-col">
+        <Header />
+        <Outlet />
+      </div>
     </div>
   );
 };

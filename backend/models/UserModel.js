@@ -15,11 +15,11 @@ const Users = db.define(
     password: {
       type: DataTypes.STRING,
     },
-    tabel: {
-      type: DataTypes.INTEGER,
-    },
     refresh_token: {
       type: DataTypes.TEXT,
+    },
+    topic: {
+      type: DataTypes.STRING,
     },
   },
   {

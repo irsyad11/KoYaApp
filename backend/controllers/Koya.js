@@ -1,7 +1,7 @@
 import Koya from "../models/KoyaModel.js";
 
 export const getData = async (req, res) => {
-  const topic = req.body.topic;
+  const topic = req.query.topic;
   try {
     const data = await Koya.findAll({
       limit: 1,

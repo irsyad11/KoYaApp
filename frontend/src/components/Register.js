@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [topic, setTopic] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [msg, setMsg] = useState("");
@@ -16,6 +17,7 @@ const Register = () => {
       await axios.post("http://localhost:5000/users", {
         name,
         email,
+        topic,
         password,
         confPassword,
       });
@@ -59,6 +61,20 @@ const Register = () => {
                 placeholder="example@example.exe"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="mt-10">
+            <label className="ml-2 text-lg font-bold">Topic</label>
+            <div className="mt-2">
+              <input
+                type="text"
+                name="topic"
+                id="topic"
+                className="bg-blue-200 w-full px-2 py-4 rounded-lg focus:outline-none focus:bg-blue-300"
+                placeholder="Topic Mqtt Anda"
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
               />
             </div>
           </div>

@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ["id", "name", "email"],
+      attributes: ["id", "name", "email", "topic"],
     });
     res.json(users);
   } catch (error) {
@@ -14,7 +14,7 @@ export const getUsers = async (req, res) => {
 };
 
 export const Register = async (req, res) => {
-  const { name, email, password, confPassword } = req.body;
+  const { name, email, topic, password, confPassword } = req.body;
 
   if (password !== confPassword)
     return res
@@ -28,6 +28,7 @@ export const Register = async (req, res) => {
     await Users.create({
       name: name,
       email: email,
+      topic: topic,
       password: hashPassword,
     });
     res.json({ msg: "register Berhasil" });
@@ -48,16 +49,17 @@ export const Login = async (req, res) => {
     const userId = user[0].id;
     const name = user[0].name;
     const email = user[0].email;
+    const topic = user[0].topic;
 
     const accesToken = jwt.sign(
-      { userId, name, email },
+      { userId, name, email, topic },
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "20s",
       }
     );
     const refreshToken = jwt.sign(
-      { userId, name, email },
+      { userId, name, email, topic },
       process.env.REFRESH_TOKEN_SECRET,
       {
         expiresIn: "1d",
