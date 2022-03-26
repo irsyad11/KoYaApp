@@ -2,11 +2,20 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import * as mqtt from "mqtt";
 
 import db from "./config/Database.js";
 import router from "./routes/index.js";
+import Koya from "./models/KoyaModel.js";
 
 dotenv.config();
+
+const options = {
+  host: "test.mosquitto.org",
+  port: 1883,
+};
+const topicSub = "KoYaApp";
+const client = mqtt.connect(options);
 
 const app = express();
 
