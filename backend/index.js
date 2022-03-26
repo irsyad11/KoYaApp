@@ -2,21 +2,13 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import * as mqtt from "mqtt";
 
 import db from "./config/Database.js";
 import router from "./routes/index.js";
-import Koya from "./models/KoyaModel.js";
-
-const port = 5000;
 
 dotenv.config();
-const options = {
-  host: "test.mosquitto.org",
-  port: 1883,
-};
-const topicSub = "KoYaApp";
-const client = mqtt.connect(options);
+
+const app = express();
 
 // mqtt client and subscribe
 client.on("message", async (topic, message) => {
@@ -46,21 +38,17 @@ client.on("error", () => {
 });
 // end mqtt client
 
-const app = express();
-
 try {
   await db.authenticate();
-  console.log("Database connected .......");
+  console.log("Databse Connected.....");
   await db.sync();
 } catch (error) {
   console.log(error);
 }
 
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
 
-app.listen(port, () => {
-  console.log(`server running at ${port} .......`);
-});
+app.listen(5000, () => console.log("server running at port 5000"));

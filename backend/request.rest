@@ -1,16 +1,15 @@
-GET http://localhost:5000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJhaXJkMTEiLCJlbWFpbCI6Imlyc3lhZEBnbWFpbC5jb20iLCJpYXQiOjE2NDgyMTc2ODcsImV4cCI6MTY0ODIxNzcwN30._SrlmfILIt-ofON4FeaJ44VIW-kF1LPwPYKX2SVtDa4
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJJcnN5YWQiLCJlbWFpbCI6Imlyc3lhZGFpcjExQGdtYWlsLmNvbSIsImlhdCI6MTY0ODEyOTc1OSwiZXhwIjoxNjQ4MTI5Nzc0fQ.8kkyoDYmeads5fU8kplw8AUD9sK637fBKrCq03eYq2A
 
 ###
-POST  http://localhost:5000/user
+POST  http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "aird11",
-    "email": "irsyad@gmail.com",
-    "topic": "KoYaApp",
-    "password": "123456",
-    "confPassword": "123456"
+    "name": "Irsyad2",
+    "email": "irsyadair12@gmail.com",
+    "password": "1234567",
+    "confPassword" : "1234567"
 }
 
 ###
@@ -18,7 +17,7 @@ POST  http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "irsyad@gmail.com",
+    "email": "irsyadair11@gmail.com",
     "password": "123456"
 }
 
@@ -27,12 +26,3 @@ GET   http://localhost:5000/token
 
 ###
 DELETE    http://localhost:5000/logout
-
-###
-GET http://localhost:5000/data
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJhaXJkMTEiLCJlbWFpbCI6Imlyc3lhZEBnbWFpbC5jb20iLCJpYXQiOjE2NDgyMjM4MDgsImV4cCI6MTY0ODIyMzgyOH0.-QGdwNiGIUnqIaq26wzcrTLNx6Z-6gyaWnUf8rMo8rE
-Content-Type: application/json
-
-{
-    "topic": "KoYaApp"
-}
