@@ -26,9 +26,9 @@ function Home() {
           },
         });
         const koyaData = result.data[0];
-        setTemp(koyaData.temp);
-        setHum(koyaData.hum);
-        setAmonia(koyaData.amonia);
+        setTemp(koyaData.temp.toFixed(2));
+        setHum(koyaData.hum.toFixed(2));
+        setAmonia(koyaData.amonia.toFixed(2));
       };
       getData();
     }, 500);
