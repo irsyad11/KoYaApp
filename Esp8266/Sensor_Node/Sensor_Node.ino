@@ -11,6 +11,9 @@
 #define LEDPWR D1
 #define LEDSEND D2
 
+
+#define KoyaId 1
+
 DHT dht(DHTPIN, DHTTYPE);
 
 
@@ -207,6 +210,7 @@ void loop() {
   doc["temperature"] = x_now_t;
   doc["humidity"] = x_now_h;
   doc["amonia"] = x_now_g;
+  doc["id"] = KoyaId;
   
   char buffer[100];
   
@@ -219,7 +223,7 @@ void loop() {
   delay(1000);
   digitalWrite(LEDSEND, LOW); // turn the LED Green off
 
-  delay(10000);
+  delay(9000);
 }
 
 void wifiConnect() {

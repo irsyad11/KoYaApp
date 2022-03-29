@@ -26,13 +26,14 @@ client.on("message", async (topic, message) => {
   const temperature = ob.temperature;
   const humidity = ob.humidity;
   const amonia = ob.amonia;
+  const id = ob.id;
 
   try {
     await Koya.create({
       temp: temperature,
       hum: humidity,
       amonia: amonia,
-      topic: topic,
+      id_user: id,
     });
   } catch (error) {}
 });

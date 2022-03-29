@@ -15,8 +15,8 @@ const Koya = db.define(
     amonia: {
       type: DataTypes.FLOAT,
     },
-    topic: {
-      type: DataTypes.STRING,
+    id_user: {
+      type: DataTypes.INTEGER,
     },
   },
   {

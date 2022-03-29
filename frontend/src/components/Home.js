@@ -10,6 +10,7 @@ function Home() {
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   const navigate = useNavigate();
+  let id_user;
 
   useEffect(() => {
     refreshToken();
@@ -17,12 +18,12 @@ function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const data = getUsers();
+      const data = id_user;
       const getData = async () => {
-        const topic = await data;
+        // const userId = await data;
         const result = await axios.get("http://localhost:5000/data", {
           params: {
-            topic: topic,
+            id: data,
           },
         });
         const koyaData = result.data[0];
@@ -32,7 +33,9 @@ function Home() {
       };
       getData();
     }, 500);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const refreshToken = async () => {
@@ -41,6 +44,7 @@ function Home() {
       setToken(response.data.accesToken);
       const decoded = jwtDecode(response.data.accesToken);
       setExpire(decoded.exp);
+      return (id_user = decoded.userId);
     } catch (error) {
       if (error.response) {
         navigate("/");
@@ -48,36 +52,36 @@ function Home() {
     }
   };
 
-  const axiosJwt = axios.create();
+  // const axiosJwt = axios.create();
 
-  axiosJwt.interceptors.request.use(
-    async (config) => {
-      const currentDate = new Date();
-      if (expire * 1000 < currentDate.getTime()) {
-        const response = await axios.get("http://localhost:5000/token");
-        config.headers.Authorization = `Bearer ${response.data.accesToken}`;
-        setToken(response.data.accesToken);
-        const decoded = jwtDecode(response.data.accesToken);
-        setExpire(decoded.exp);
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  // axiosJwt.interceptors.request.use(
+  //   async (config) => {
+  //     const currentDate = new Date();
+  //     if (expire * 1000 < currentDate.getTime()) {
+  //       const response = await axios.get("http://localhost:5000/token");
+  //       config.headers.Authorization = `Bearer ${response.data.accesToken}`;
+  //       setToken(response.data.accesToken);
+  //       const decoded = jwtDecode(response.data.accesToken);
+  //       setExpire(decoded.exp);
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
-  const getUsers = async () => {
-    const response = await axiosJwt
-      .get("http://localhost:5000/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((result) => result);
+  // const getUsers = async () => {
+  //   const response = await axiosJwt
+  //     .get("http://localhost:5000/users", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((result) => result);
 
-    return response.data[0].topic;
-  };
+  //   return response.data[0].id;
+  // };
 
   return (
     <>
