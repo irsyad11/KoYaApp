@@ -219,6 +219,7 @@ void loop() {
   serializeJson(doc, Serial);
   Serial.println();
   digitalWrite(LEDSEND, HIGH); // turn the LED Green on
+  mqtt.publish("KoYaApp_1", buffer);
   mqtt.publish("KoYaApp", buffer);
   delay(1000);
   digitalWrite(LEDSEND, LOW); // turn the LED Green off

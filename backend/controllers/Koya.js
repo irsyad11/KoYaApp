@@ -7,7 +7,7 @@ export const getData = async (req, res) => {
       where: {
         id_user: id,
       },
-      // limit: 1,
+      limit: 1,
       order: [["id", "DESC"]],
     });
     res.json(data);

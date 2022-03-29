@@ -139,7 +139,7 @@ void connect_mqtt() {
   while(!mqtt.connected()) {
     Serial.println("Connecting MQTT ...");
     if(mqtt.connect("anderson")) {
-      mqtt.subscribe("KoYaApp"); 
+      mqtt.subscribe("KoYaApp_1"); 
     }
   }
   Serial.println();
