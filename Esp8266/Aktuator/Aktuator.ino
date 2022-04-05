@@ -15,6 +15,10 @@ PubSubClient mqtt(client);
 
 //Deklarasi JSON Document
 DynamicJsonDocument doc(100);
+DynamicJsonDocument doc1(100);
+
+//Deklarasi id aktuator
+#define KoyaId 1
 
 //inisiasi LED
 #define LEDPWR D3
@@ -182,6 +186,18 @@ void callback(char* topic, byte* payload, unsigned int length) {
   oLampu = fuzzy->defuzzify(1);
   oKipas = fuzzy->defuzzify(2);
   oFogger = fuzzy->defuzzify(3);
+
+  doc1["lamp"] = oLampu;
+  doc1["fan"] = oKipas;
+  doc1["fogger"] = oFogger;
+  doc1["id"] = KoyaId;
+  
+
+  char buffer[100];
+
+  serializeJson(doc1, buffer);
+  mqtt.publish("KoYaAppAktuator", buffer);
+  
   dimmer.setPower(oLampu);
   if (oKipas == 1) {
     digitalWrite(relay1, LOW);

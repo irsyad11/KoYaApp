@@ -215,12 +215,9 @@ void loop() {
   char buffer[100];
   
   serializeJson(doc, buffer);
-  Serial.print("publish message : ");
-  serializeJson(doc, Serial);
-  Serial.println();
   digitalWrite(LEDSEND, HIGH); // turn the LED Green on
   mqtt.publish("KoYaApp_1", buffer);
-  mqtt.publish("KoYaApp", buffer);
+  mqtt.publish("KoYaAppSensor", buffer);
   delay(1000);
   digitalWrite(LEDSEND, LOW); // turn the LED Green off
 

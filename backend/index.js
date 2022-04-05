@@ -6,7 +6,8 @@ import * as mqtt from "mqtt";
 
 import db from "./config/Database.js";
 import router from "./routes/index.js";
-import Koya from "./models/KoyaModel.js";
+import KoyaSensor from "./models/KoyaSensorModel.js";
+import KoyaAktuator from "./models/KoyaAktuatorModel.js";
 
 dotenv.config();
 
@@ -14,33 +15,54 @@ const options = {
   host: "test.mosquitto.org",
   port: 1883,
 };
-const topicSub = "KoYaApp";
+const topicSen = "KoYaAppSensor";
+const topicAct = "KoYaAppAktuator";
 const client = mqtt.connect(options);
 
 const app = express();
 
 // mqtt client and subscribe
 client.on("message", async (topic, message) => {
-  message = message.toString();
-  const ob = JSON.parse(message);
-  const temperature = ob.temperature;
-  const humidity = ob.humidity;
-  const amonia = ob.amonia;
-  const id = ob.id;
+  if (topic == topicSen) {
+    message = message.toString();
+    const ob = JSON.parse(message);
+    const temperature = ob.temperature;
+    const humidity = ob.humidity;
+    const amonia = ob.amonia;
+    const id = ob.id;
 
-  try {
-    await Koya.create({
-      temp: temperature,
-      hum: humidity,
-      amonia: amonia,
-      id_user: id,
-    });
-  } catch (error) {}
+    try {
+      await KoyaSensor.create({
+        temp: temperature,
+        hum: humidity,
+        amonia: amonia,
+        id_user: id,
+      });
+    } catch (error) {}
+  }
+  if (topic == topicAct) {
+    message = message.toString();
+    const ob = JSON.parse(message);
+    const lamp = ob.lamp;
+    const fan = ob.fan;
+    const fogger = ob.fogger;
+    const id = ob.id;
+
+    try {
+      await KoyaAktuator.create({
+        lamp: lamp,
+        fan: fan,
+        fogger: fogger,
+        id_user: id,
+      });
+    } catch (error) {}
+  }
 });
 
 client.on("connect", () => {
   console.log("Mqtt connected ......");
-  client.subscribe(topicSub);
+  client.subscribe(topicSen);
+  client.subscribe(topicAct);
 });
 
 client.on("error", () => {

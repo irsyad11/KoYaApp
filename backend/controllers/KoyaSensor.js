@@ -1,9 +1,9 @@
-import Koya from "../models/KoyaModel.js";
+import KoyaSensor from "../models/KoyaSensorModel.js";
 
-export const getData = async (req, res) => {
+export const getDataSen = async (req, res) => {
   const id = req.query.id;
   try {
-    const data = await Koya.findAll({
+    const data = await KoyaSensor.findAll({
       where: {
         id_user: id,
       },

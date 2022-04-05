@@ -26,8 +26,8 @@ const Sidebar = () => {
     <>
       <aside
         className={` ${
-          isOpen ? "w-[250px]" : "w-max"
-        }  h-screen bg-blue-500 px-5 py-3 transition-all  ease-in-out duration-300`}
+          isOpen ? "w-[250px] absolute" : "w-max fixed"
+        } z-40 sticky top-0 min-h-screen h-full bg-blue-500 px-5 py-3 transition-all  ease-in-out duration-300`}
       >
         <div
           className={`flex items-center mt-5 ${

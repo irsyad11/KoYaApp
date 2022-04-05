@@ -5,14 +5,16 @@ void fuzzySet() {
   suhu->addFuzzySet(dingin);
   suhu->addFuzzySet(normal);
   suhu->addFuzzySet(panas);
+  
   fuzzy->addFuzzyInput(suhu);
 
   // FuzzyInput
   FuzzyInput *kelembaban = new FuzzyInput(2);
 
   kelembaban->addFuzzySet(rendah);
-  kelembaban->addFuzzySet(sedang);
+  kelembaban->addFuzzySet(lembab);
   kelembaban->addFuzzySet(tinggi);
+  
   fuzzy->addFuzzyInput(kelembaban);
 
   // FuzzyInput
@@ -20,14 +22,16 @@ void fuzzySet() {
 
   amonia->addFuzzySet(aman);
   amonia->addFuzzySet(bahaya);
+  
   fuzzy->addFuzzyInput(amonia);
 
   // FuzzyOutput
   FuzzyOutput *lampu = new FuzzyOutput(1);
 
   lampu->addFuzzySet(redup);
-  lampu->addFuzzySet(lembab);
+  lampu->addFuzzySet(sedang);
   lampu->addFuzzySet(terang);
+  
   fuzzy->addFuzzyOutput(lampu);
 
   // FuzzyOutput
@@ -35,6 +39,7 @@ void fuzzySet() {
 
   kipas->addFuzzySet(kipasA);
   kipas->addFuzzySet(kipasP);
+  
   fuzzy->addFuzzyOutput(kipas);
 
   // FuzzyOutput
@@ -42,5 +47,6 @@ void fuzzySet() {
 
   fogger->addFuzzySet(foggerA);
   fogger->addFuzzySet(foggerP);
+  
   fuzzy->addFuzzyOutput(fogger);
 }

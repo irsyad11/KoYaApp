@@ -27,11 +27,11 @@ function Account() {
     }
   };
   return (
-    <div className="w-auto h-max bg-white drop-shadow-lg m-10 rounded-2xl px-16 pt-8 pb-12">
+    <div className="w-max h-max bg-white drop-shadow-lg mt-10 rounded-2xl px-16 pt-8 pb-12">
       <h2 className="text-xl font font-semibold">Profil</h2>
 
       <div className=" mt-5">
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <div className="w-24">
             <p className="text-md">Nama </p>
           </div>
@@ -40,7 +40,7 @@ function Account() {
           </div>
         </div>
 
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <div className="w-24 mt-3">
             <p>Email </p>
           </div>
@@ -49,7 +49,7 @@ function Account() {
           </div>
         </div>
 
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <div className="w-24 mt-3">
             <p>Topic setup </p>
           </div>

@@ -3,8 +3,8 @@ import db from "../config/Database.js";
 
 const { DataTypes } = sequelize;
 
-const Koya = db.define(
-  "koya",
+const KoyaSensor = db.define(
+  "koya_sensor",
   {
     temp: {
       type: DataTypes.FLOAT,
@@ -24,4 +24,4 @@ const Koya = db.define(
   }
 );
 
-export default Koya;
+export default KoyaSensor;
