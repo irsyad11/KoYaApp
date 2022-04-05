@@ -10,8 +10,8 @@ function Home() {
   const [lamp, setLamp] = useState("_");
   const [fan, setFan] = useState("_");
   const [fogger, setFogger] = useState("_");
-  const [token, setToken] = useState("");
-  const [expire, setExpire] = useState("");
+  // const [token, setToken] = useState("");
+  // const [expire, setExpire] = useState("");
   const navigate = useNavigate();
   let id_user;
 
