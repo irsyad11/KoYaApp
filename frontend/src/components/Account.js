@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function Account() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [topic, setTopic] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ function Account() {
       const decoded = jwtDecode(response.data.accesToken);
       setName(decoded.name);
       setEmail(decoded.email);
-      setTopic(decoded.topic);
     } catch (error) {
       if (error.response) {
         navigate("/");
@@ -46,15 +44,6 @@ function Account() {
           </div>
           <div className="mt-3">
             <p className="text-md font-bold">{email}</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row">
-          <div className="w-24 mt-3">
-            <p>Topic setup </p>
-          </div>
-          <div className="mt-3">
-            <p className="text-md font-bold">{topic}</p>
           </div>
         </div>
       </div>

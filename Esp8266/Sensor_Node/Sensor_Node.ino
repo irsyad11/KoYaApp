@@ -74,7 +74,7 @@ PubSubClient mqtt(client);
 //deklarasi json document
 DynamicJsonDocument doc(100);
 
-unsigned long lastMsg = 0;
+const float humidityCorrectionPercentage = -0.25;
 
 void wifiConnect();
 void connect_mqtt();
@@ -122,6 +122,7 @@ void loop() {
 
 //pembacaan data sensor DHT11
   h = dht.readHumidity();
+  h = h + h * humidityCorrectionPercentage;
   t = dht.readTemperature();
   int i = 0;
 

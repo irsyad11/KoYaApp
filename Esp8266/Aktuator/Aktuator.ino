@@ -166,7 +166,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   nh3 = doc["amonia"];
 
   digitalWrite(LEDSEND, HIGH);
-  delay(1000);
+  delay(500);
   digitalWrite(LEDSEND, LOW);
 
   Serial.print("Temperature ");
@@ -196,7 +196,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
   char buffer[100];
 
   serializeJson(doc1, buffer);
-  mqtt.publish("KoYaAppAktuator", buffer);
+  byte* p = (byte*)malloc(strlen(buffer));
+  memcpy(p,buffer,strlen(buffer));
+  if(!mqtt.connected()) {
+    connect_mqtt();
+    }
+  mqtt.publish("KoYaAppAktuator", p, strlen(buffer));
+  memset(buffer, 0, sizeof(buffer));
+  free(p);
   
   dimmer.setPower(oLampu);
   if (oKipas == 1) {
