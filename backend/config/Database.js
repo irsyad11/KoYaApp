@@ -4,7 +4,7 @@ const db = new sequelize("koya_db", "root", "", {
   host: "localhost",
   dialect: "mysql",
   dialectOptions: {
-    useUTC: false, //for reading from database
+    // useUTC: false, //for reading from database
     dateStrings: true,
     typeCast: true,
   },

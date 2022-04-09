@@ -8,6 +8,9 @@ import db from "./config/Database.js";
 import router from "./routes/index.js";
 import KoyaSensor from "./models/KoyaSensorModel.js";
 import KoyaAktuator from "./models/KoyaAktuatorModel.js";
+import KalmanAmoniaTesting from "./models/Kf1.js";
+// import KalmanAmoniaTestingTemp from "./models/Kf2.js";
+import KalmanAmoniaTestingHum from "./models/Kf3.js";
 
 dotenv.config();
 
@@ -17,6 +20,7 @@ const options = {
 };
 const topicSen = "KoYaAppSensor";
 const topicAct = "KoYaAppAktuator";
+const topicKF = "KoyaAppKalmanTest";
 const client = mqtt.connect(options);
 
 const app = express();
@@ -57,12 +61,56 @@ client.on("message", async (topic, message) => {
       });
     } catch (error) {}
   }
+  // if (topic == topicKF) {
+  //   message = message.toString();
+  //   const ob = JSON.parse(message);
+  //   const Kd1 = ob.kd1;
+  //   const Kd2 = ob.kd2;
+  //   const Kd3 = ob.kd3;
+  //   const Kd4 = ob.kd4;
+  //   const Kd5 = ob.kd5;
+  //   const rd = ob.rd;
+
+  //   try {
+  //     await KalmanAmoniaTesting.create({
+  //       kd1: Kd1,
+  //       kd2: Kd2,
+  //       kd3: Kd3,
+  //       kd4: Kd4,
+  //       kd5: Kd5,
+  //       rd: rd,
+  //     });
+  //   } catch (error) {}
+
+  //   // try {
+  //   //   await KalmanAmoniaTestingTemp.create({
+  //   //     kd1: Kd1,
+  //   //     kd2: Kd2,
+  //   //     kd3: Kd3,
+  //   //     kd4: Kd4,
+  //   //     kd5: Kd5,
+  //   //     rd: rd,
+  //   //   });
+  //   // } catch (error) {}
+
+  //   // try {
+  //   //   await KalmanAmoniaTestingHum.create({
+  //   //     kd1: Kd1,
+  //   //     kd2: Kd2,
+  //   //     kd3: Kd3,
+  //   //     kd4: Kd4,
+  //   //     kd5: Kd5,
+  //   //     rd: rd,
+  //   //   });
+  //   // } catch (error) {}
+  // }
 });
 
 client.on("connect", () => {
   console.log("Mqtt connected ......");
   client.subscribe(topicSen);
   client.subscribe(topicAct);
+  client.subscribe(topicKF);
 });
 
 client.on("error", () => {
